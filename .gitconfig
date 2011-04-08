@@ -1,0 +1,40 @@
+#user information
+[user]
+	name = John Murray
+	email = murrayj5@nku.edu
+
+#color highlighting
+[color]
+	ui = auto
+	interactive = auto
+
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+
+#command aliases
+[alias]
+	st = status
+	ci = commit
+	br = branch
+	co = checkout
+	df = diff
+	lg = log -p
+
+#some core configurations
+[core]
+	autocrlf = true
+	editor = vim

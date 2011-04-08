@@ -1,0 +1,1 @@
+export PATH=/home/$USER/.pythonbrew/bin:/home/$USER/.pythonbrew/pythons/current/bin:${PATH}
