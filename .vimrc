@@ -1,5 +1,11 @@
-" use vim defaults
+" use vim defaults and set basic config
 set nocompatible
+syntax on
+if has("autocmd")
+  filetype indent on
+  set sw=2
+  set ts=2
+endif
 
 " expand tab to spaces (2 in fact), and autoindent on <CR>
 set expandtab
