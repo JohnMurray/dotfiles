@@ -3,6 +3,7 @@ set nocompatible
 syntax on
 set number
 
+
 " expand tab to spaces (2 in fact), and autoindent on <CR>
 set expandtab
 set tabstop=2
@@ -13,9 +14,11 @@ if has("autocmd")
   set ts=2
 endif
 
+
 " allow incremental search
 set incsearch
 set hlsearch
+
 
 """""GENERAL EDITING SHORTCUTS
 " move line up
@@ -26,6 +29,7 @@ map <C-UP> dd<Up>P
 map <C-d> yyP
 " duplicate line
 map! <C-d> <Esc>yyPa
+
 
 """""RUBY SPECIFIC FILE EDITING
 " insert class
@@ -42,3 +46,7 @@ if has("autocmd")
   \  exe "normal! g'\"" |
   \ endif
 endif
+
+
+" register non-standard extensions
+au BufNewFile,BufRead *.ru set filetype=ruby
