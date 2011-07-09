@@ -1,16 +1,17 @@
 " use vim defaults and set basic config
 set nocompatible
 syntax on
-if has("autocmd")
-  filetype indent on
-  set sw=2
-  set ts=2
-endif
+set number
 
 " expand tab to spaces (2 in fact), and autoindent on <CR>
 set expandtab
 set tabstop=2
 set autoindent
+if has("autocmd")
+  filetype indent on
+  set sw=2
+  set ts=2
+endif
 
 " allow incremental search
 set incsearch
