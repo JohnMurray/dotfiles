@@ -2,6 +2,7 @@
 set nocompatible
 syntax on
 set number
+set ruler
 
 
 " expand tab to spaces (2 in fact), and autoindent on <CR>
