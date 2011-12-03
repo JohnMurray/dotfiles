@@ -13,5 +13,6 @@ fi
 alias ll='ls -l'
 alias la='ls -A'
 alias l='ls -CF'
+alias lla='ls -lA'
 alias xampp='sudo /opt/lampp/lampp'
 alias rspec='rspec --color --format documentation'
