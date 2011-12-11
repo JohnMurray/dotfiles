@@ -1,0 +1,6 @@
+##----
+## Contains configuration for xterm sessions. Mostly just the way it looks,
+## the fonts, colors, etc.
+##----
+
+XTerm*background: white

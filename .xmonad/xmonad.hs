@@ -9,7 +9,6 @@ import XMonad.Util.EZConfig(additionalKeys)
 import System.IO
 
 
-
 main = do
   xmproc <- spawnPipe "/usr/bin/xmobar /home/john/.xmobarrc" 
   xmonad $ defaultConfig
@@ -20,4 +19,5 @@ main = do
          , ppTitle = xmobarColor "blue" "" . shorten 50
          , ppLayout = const "" -- to disable the layout info on xmobar
          }
+    , XMonad.terminal = "xterm"
     }
