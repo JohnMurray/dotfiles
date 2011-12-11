@@ -36,5 +36,5 @@
 
 #some core configurations
 [core]
-	autocrlf = true
+	autocrlf = false
 	editor = vim

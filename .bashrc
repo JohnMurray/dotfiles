@@ -60,13 +60,9 @@ export VIMFILES="$HOME/.vim"
 ##----
 ## 
 ## Program-Specific configuration options for various programs that
-## deserver their own place in my main bash conf file.  :-)
+## deserve their own place in my main bash conf file.  :-)
 ## 
 ##----
-
-#Python Brew
-export PYTHONBREW_ROOT="$HOME/.pythonbrew"
-source /home/john/.pythonbrew/etc/bashrc
 
 #Ruby Version Manager (RVM)
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
