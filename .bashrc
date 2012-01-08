@@ -4,7 +4,9 @@ if [[ -z "$PS1" ]]; then
 fi
 
 #source the main bashrc file (I guess..)
-source /etc/bash.bashrc
+if [ -e "/etc/bash.bashrc" ] && [ -f "/etc/bash.bashrc" ] ; then
+  source /etc/bash.bashrc
+fi
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # don't overwrite GNU Midnight Commander's setting of `ignorespace'.
