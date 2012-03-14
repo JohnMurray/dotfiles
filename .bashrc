@@ -56,16 +56,3 @@ PATH="$HOME/bin:$PATH"
 export PATH
 export GREP_OPTIONS='--color=auto'
 export VIMFILES="$HOME/.vim"
-
-
-
-##----
-## 
-## Program-Specific configuration options for various programs that
-## deserve their own place in my main bash conf file.  :-)
-## 
-##----
-
-#Ruby Version Manager (RVM)
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
-
