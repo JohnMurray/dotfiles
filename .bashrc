@@ -1,7 +1,5 @@
 # If not running interactively, don't do anything
-if [[ -z "$PS1" ]]; then
-    alias null='/dev/null'
-fi
+if [[ -z "$PS1" ]]; then alias null='/dev/null' fi
 
 #source the main bashrc file (I guess..)
 if [ -e "/etc/bash.bashrc" ] && [ -f "/etc/bash.bashrc" ] ; then
@@ -32,6 +30,9 @@ fi
 # Assume that we have color support (why wouldn't we) and make a pretty prompt
 # The prompt reads user@host:dir$
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ '
+# Ensure that the prompt starts at the far-left side (remove ^C crap and what not)
+# From: http://jonisalonen.com/2012/your-bash-prompt-needs-this/
+PS1="\[\033[G\]$PS1"
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
