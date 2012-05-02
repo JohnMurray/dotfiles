@@ -1,5 +1,9 @@
+#!/bin/bash
+
 # If not running interactively, don't do anything
-if [[ -z "$PS1" ]]; then alias null='/dev/null' fi
+if [[ -z "$PS1" ]] ; then 
+  alias null='/dev/null' 
+fi
 
 #source the main bashrc file (I guess..)
 if [ -e "/etc/bash.bashrc" ] && [ -f "/etc/bash.bashrc" ] ; then
