@@ -61,3 +61,9 @@ PATH="$HOME/bin:$PATH"
 export PATH
 export GREP_OPTIONS='--color=auto'
 export VIMFILES="$HOME/.vim"
+
+# Load rbenv if available
+if [ -e "$HOME/.rbenv/bin" ] && [ -d "$HOME/.rbenv/bin" ] ; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi
