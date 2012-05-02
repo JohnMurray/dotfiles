@@ -7,7 +7,7 @@ require 'fileutils'
 ##----
 task :deploy do
   Dir[".[^.]*"].each do |file|
-    unless file == '.git'
+    unless ['.git'].include? file
       FileUtils.cp_r file, Dir.home
     end
   end
