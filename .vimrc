@@ -3,6 +3,8 @@ set nocompatible
 syntax on
 set number
 set ruler
+set paste
+set cursorline
 
 
 " expand tab to spaces (2 in fact), and autoindent on <CR>
@@ -30,6 +32,13 @@ map <C-UP> dd<Up>P
 map <C-d> yyP
 " duplicate line
 map! <C-d> <Esc>yyPa
+
+
+" general editor settings
+if v:version > 700
+  set cursorline
+  hi CursorLine ctermbg=DarkGrey cterm=none
+endif
 
 
 """""RUBY SPECIFIC FILE EDITING
