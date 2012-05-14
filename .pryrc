@@ -21,3 +21,16 @@ end
 def rl
   fl(@@recent)
 end
+
+##
+## timing functions
+##
+def time(&block)
+  t1 = Time.now
+  yield
+  t2 = Time.now
+  diff = t2 - t1
+  puts "#{diff} seconds"
+  puts "#{(diff - diff.to_i) * 1000} milliseconds"
+end
+alias :t :time

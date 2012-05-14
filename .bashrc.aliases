@@ -10,6 +10,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # A BUNCH OF ALIASES TAHT I LIKE
+alias ls='ls -G'
 alias ll='ls -l'
 alias la='ls -A'
 alias l='ls -CF'
