@@ -33,6 +33,7 @@
 	co = checkout
 	df = diff
 	lg = log -p
+        alias = "config --get-regexp 'alias.*'"
 
 #some core configurations
 [core]

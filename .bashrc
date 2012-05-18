@@ -1,6 +1,8 @@
+#!/bin/bash
+
 # If not running interactively, don't do anything
-if [[ -z "$PS1" ]]; then
-    alias null='/dev/null'
+if [[ -z "$PS1" ]] ; then 
+  alias null='/dev/null' 
 fi
 
 #source the main bashrc file (I guess..)
@@ -32,6 +34,9 @@ fi
 # Assume that we have color support (why wouldn't we) and make a pretty prompt
 # The prompt reads user@host:dir$
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ '
+# Ensure that the prompt starts at the far-left side (remove ^C crap and what not)
+# From: http://jonisalonen.com/2012/your-bash-prompt-needs-this/
+PS1="\[\033[G\]$PS1"
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -57,15 +62,8 @@ export PATH
 export GREP_OPTIONS='--color=auto'
 export VIMFILES="$HOME/.vim"
 
-
-
-##----
-## 
-## Program-Specific configuration options for various programs that
-## deserve their own place in my main bash conf file.  :-)
-## 
-##----
-
-#Ruby Version Manager (RVM)
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
-
+# Load rbenv if available
+if [ -e "$HOME/.rbenv/bin" ] && [ -d "$HOME/.rbenv/bin" ] ; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi
