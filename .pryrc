@@ -34,3 +34,9 @@ def time(&block)
   puts "#{(diff - diff.to_i) * 1000} milliseconds"
 end
 alias :t :time
+
+
+## 
+## Pry settings
+## 
+Pry.editor = 'vim'
