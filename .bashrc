@@ -48,7 +48,9 @@ xterm*|rxvt*)
 esac
 
 # Alias definitions.
-source $HOME/.bashrc.aliases
+if [ -e $HOME/.bashrc.aliases ] && [ -f $HOME/.bashrc.aliases ] ; then
+  source $HOME/.bashrc.aliases
+fi
 
 # enable programmable completion features (so freaking nice!)
 if [ -f /etc/bash_completion ]; then
@@ -61,6 +63,7 @@ PATH="$HOME/bin:$PATH"
 export PATH
 export GREP_OPTIONS='--color=auto'
 export VIMFILES="$HOME/.vim"
+export EDITOR='vim'
 
 # Load rbenv if available
 if [ -e "$HOME/.rbenv/bin" ] && [ -d "$HOME/.rbenv/bin" ] ; then
