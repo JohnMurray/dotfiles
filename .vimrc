@@ -21,6 +21,8 @@ endif
 " allow incremental search
 set incsearch
 set hlsearch
+" set clear-search command
+command C let @/=""
 
 
 " general editor settings
