@@ -45,3 +45,7 @@ endif
 au BufNewFile,BufRead *.ru set filetype=ruby
 
 hi Todo ctermbg=Black ctermfg=DarkMagenta
+
+
+" what vi user doesn't love the mousse!
+set mouse=a
