@@ -41,9 +41,6 @@ if has("autocmd")
 endif
 
 
-" register non-standard extensions
-au BufNewFile,BufRead *.ru set filetype=ruby
-au BufNewFile,BufRead Gemfile set filetype=ruby
 
 hi Todo ctermbg=Black ctermfg=DarkMagenta
 
