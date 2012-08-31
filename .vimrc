@@ -28,7 +28,7 @@ command C let @/=""
 " general editor settings
 if v:version > 700
   set cursorline
-  hi CursorLine ctermbg=DarkGrey cterm=none
+  hi CursorLine ctermbg=Black cterm=none
 endif
 
 
@@ -43,5 +43,6 @@ endif
 
 " register non-standard extensions
 au BufNewFile,BufRead *.ru set filetype=ruby
+au BufNewFile,BufRead Gemfile set filetype=ruby
 
 hi Todo ctermbg=Black ctermfg=DarkMagenta
