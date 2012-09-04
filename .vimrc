@@ -11,6 +11,7 @@ set ruler
 set expandtab
 set tabstop=2
 set autoindent
+set smartindent
 if has("autocmd")
   filetype indent on
   set sw=2
@@ -41,7 +42,7 @@ if has("autocmd")
 endif
 
 
-
+" highlight TODO markers
 hi Todo ctermbg=Black ctermfg=DarkMagenta
 
 
