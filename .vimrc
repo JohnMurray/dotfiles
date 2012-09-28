@@ -11,6 +11,7 @@ set ruler
 set expandtab
 set tabstop=2
 set autoindent
+set smartindent
 if has("autocmd")
   filetype indent on
   set sw=2
@@ -28,7 +29,7 @@ command C let @/=""
 " general editor settings
 if v:version > 700
   set cursorline
-  hi CursorLine ctermbg=DarkGrey cterm=none
+  hi CursorLine ctermbg=Black cterm=none
 endif
 
 
@@ -41,7 +42,9 @@ if has("autocmd")
 endif
 
 
-" register non-standard extensions
-au BufNewFile,BufRead *.ru set filetype=ruby
-
+" highlight TODO markers
 hi Todo ctermbg=Black ctermfg=DarkMagenta
+
+
+" what vi user doesn't love the mousse!
+set mouse=a
