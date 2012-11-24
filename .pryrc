@@ -40,3 +40,18 @@ alias :t :time
 ## Pry settings
 ## 
 Pry.editor = 'vim'
+
+
+## Monkey patch for Pry to work on JRuby 1.7.0
+if RUBY_VERSION == '1.9.3' && RUBY_ENGINE == 'jruby'
+  class IO
+    def winsize
+      stty_info = `stty -a`
+      # BSD version of stty, like the one used in Mac OS X
+      match = stty_info.match(/(\d+) rows; (\d+) columns/)
+      # GNU version of stty, like the one used in Ubuntu
+      match ||= stty_info.match(/; rows (\d+); columns (\d+)/)
+      [match[1].to_i, match[2].to_i]
+    end
+  end
+end

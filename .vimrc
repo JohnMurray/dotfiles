@@ -2,7 +2,6 @@
 set nocompatible
 syntax on
 set number
-set paste
 set cursorline
 set ruler
 

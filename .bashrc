@@ -70,3 +70,9 @@ if [ -e "$HOME/.rbenv/bin" ] && [ -d "$HOME/.rbenv/bin" ] ; then
   export PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"
 fi
+
+
+# Load .bash_profile if it is available
+if [ -e "$HOME/.bash_profile" ] ; then
+  . "$HOME/.bash_profile"
+fi
