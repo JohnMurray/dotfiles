@@ -73,6 +73,6 @@ fi
 
 
 # Load .bash_profile if it is available
-if [ -e "$HOME/.bash_profile" ] ; then
-  . "$HOME/.bash_profile"
+if [ -e "$HOME/.bash_etc" ] ; then
+  . "$HOME/.bash_etc"
 fi
