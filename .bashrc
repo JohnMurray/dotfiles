@@ -72,7 +72,7 @@ if [ -e "$HOME/.rbenv/bin" ] && [ -d "$HOME/.rbenv/bin" ] ; then
 fi
 
 
-# Load .bash_profile if it is available
+# Load .bash_etc if it is available (for OS-specific configs, not versioned)
 if [ -e "$HOME/.bash_etc" ] ; then
   . "$HOME/.bash_etc"
 fi
