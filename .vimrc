@@ -5,6 +5,10 @@ set number
 set cursorline
 set ruler
 
+" search settings
+set ignorecase
+set smartcase
+
 
 " expand tab to spaces (2 in fact), and autoindent on <CR>
 set expandtab
