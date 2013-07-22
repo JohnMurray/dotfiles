@@ -5,11 +5,6 @@ if [[ -z "$PS1" ]] ; then
   alias null='/dev/null' 
 fi
 
-#source the main bashrc file (I guess..)
-if [ -e "/etc/bash.bashrc" ] && [ -f "/etc/bash.bashrc" ] ; then
-  source /etc/bash.bashrc
-fi
-
 # don't put duplicate lines in the history. See bash(1) for more options
 # don't overwrite GNU Midnight Commander's setting of `ignorespace'.
 export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
@@ -47,18 +42,8 @@ xterm*|rxvt*)
     ;;
 esac
 
-# Alias definitions.
-if [ -e $HOME/.bashrc.aliases ] && [ -f $HOME/.bashrc.aliases ] ; then
-  source $HOME/.bashrc.aliases
-fi
 
-# enable programmable completion features (so freaking nice!)
-if [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-fi
-
-
-#Path executable options and command variables
+# Path executable options and command variables
 PATH="$HOME/bin:$PATH"
 export PATH
 export GREP_OPTIONS='--color=auto'
@@ -71,8 +56,30 @@ if [ -e "$HOME/.rbenv/bin" ] && [ -d "$HOME/.rbenv/bin" ] ; then
   eval "$(rbenv init -)"
 fi
 
+# Specify GoLang settings
+export PATH="${GOPATH//://bin:}/bin:$PATH";
+
+
+
+
+
+##
+## Load External Files
+##
+
+
+# enable programmable completion features
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
+
+# Alias definitions
+if [ -e $HOME/.bashrc.aliases ] && [ -f $HOME/.bashrc.aliases ] ; then
+  source $HOME/.bashrc.aliases
+fi
 
 # Load .bash_etc if it is available (for OS-specific configs, not versioned)
+# also, we want to load this last so that it can be used for any overrides
 if [ -e "$HOME/.bash_etc" ] ; then
   . "$HOME/.bash_etc"
 fi
