@@ -57,7 +57,7 @@ if [ -e "$HOME/.rbenv/bin" ] && [ -d "$HOME/.rbenv/bin" ] ; then
 fi
 
 # Specify GoLang settings
-export GOPATH="$HOME/.go";
+export GOPATH="$HOME/projects/go-workspace";
 export PATH="${GOPATH//://bin:}/bin:$PATH";
 
 
