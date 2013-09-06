@@ -33,7 +33,8 @@
 	co = checkout
 	df = diff
 	lg = log -p
-        alias = "config --get-regexp 'alias.*'"
+  alias = "config --get-regexp 'alias.*'"
+  lol = log --pretty=oneline --abbrev-commit --graph --decorate
 
 #some core configurations
 [core]
