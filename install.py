@@ -30,6 +30,9 @@ def main():
 
 
 def copytree(src, dst, symlinks=False, ignore=None):
+  """
+  Because copying directories in Python really just sucks
+  """
   if not os.path.exists(dst):
     os.makedirs(dst)
   for item in os.listdir(src):
