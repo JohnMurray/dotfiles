@@ -69,11 +69,6 @@ export PATH="${GOPATH//://bin:}/bin:$PATH";
 ##
 
 
-# enable programmable completion features
-if [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-fi
-
 # Alias definitions
 if [ -e $HOME/.bashrc.aliases ] && [ -f $HOME/.bashrc.aliases ] ; then
   source $HOME/.bashrc.aliases
