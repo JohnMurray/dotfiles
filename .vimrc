@@ -21,6 +21,13 @@ if has("autocmd")
   set ts=2
 endif
 
+" Set absolute-vs-relative numbering
+:au FocusLost * :set number
+:au FocusGained * :set relativenumber
+
+:au InsertEnter * :set number
+:au InsertLeave * :set relativenumber
+
 
 " allow incremental search
 set incsearch
