@@ -20,3 +20,4 @@ alias xampp='sudo /opt/lampp/lampp'
 alias rspec='rspec --color --format documentation'
 alias g='git'
 alias gh="open \`git remote -v | grep git@github.com | grep fetch | head -1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/http:\/\//'\`"
+alias pyc='python -m py_compile'
