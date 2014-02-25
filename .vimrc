@@ -1,3 +1,7 @@
+" load Pathogen (for plugin management)
+execute pathogen#infect()
+
+
 " use vim defaults and set basic config
 set nocompatible
 syntax on
@@ -56,5 +60,14 @@ endif
 hi Todo ctermbg=Black ctermfg=DarkMagenta
 
 
-" what vi user doesn't love the mousse!
-set mouse=a
+" Make tab smarter (use super tab).
+"   If the line is empty (or just whitespace) then use a normal
+"   tab, otherwise try to use auto-completion.
+function! CleverTab()
+  if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
+    return "\<Tab>"
+  else
+    return "\<C-N>"
+  endif
+endfunction
+inoremap <Tab> <C-R>=CleverTab()<CR>
