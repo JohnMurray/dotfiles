@@ -1,6 +1,5 @@
 # Dotfiles
 
-## Description:
 This "project" contains the Linux dotfiles that I used on all of my systems.
 I mainly keep them on here for my own personal storage and use. However if
 you find them useful or like a part of them, feel free to fork them and make
