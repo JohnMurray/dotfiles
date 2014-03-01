@@ -13,12 +13,12 @@ For quick easy installation, you can run either a python or ruby script, dependi
 what you have available on your system. Note that running the interall will overwrite
 any existing dot-files that conflict with what is included in this project.
 
-### Ruby
+#### Ruby
 ```ruby
 rake
 ```
 
-### Python
+#### Python
 ```python
 ./install.py
 ```
