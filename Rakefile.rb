@@ -8,7 +8,7 @@ require 'fileutils'
 task :deploy do
   puts "Copying Files"
   Dir[".[^.]*"].each do |file|
-    unless ['.git'].include? file
+    unless ['.git', 'bin', 'contrib'].include? file
       puts "\tMoving #{file}"
       FileUtils.cp_r file, Dir.home
     end

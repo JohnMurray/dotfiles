@@ -23,7 +23,7 @@ def main():
       shutil.copyfile(f, dest)
 
   for d in dirs:
-    if d[0] == '.' and d != '.git':
+    if d[0] == '.' and d != '.git' and d != 'contrib' and d != 'bin':
       dest = home + '/' + d
       print('   ' + d + '/')
       copytree(d, dest, True, None)
