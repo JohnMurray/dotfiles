@@ -1,0 +1,13 @@
+#!/bin/bash
+
+git_status="$(git status 2> /dev/null)"
+pattern="^On branch ([^${IFS}]*)"
+if [[ ! ${git_status}} =~ "working directory clean" ]]; then
+  state="*"
+fi
+# add an else if or two here if you want to get more specific
+
+if [[ ${git_status} =~ ${pattern} ]]; then
+  branch=${BASH_REMATCH[1]}
+  echo "(${branch}${state})"
+fi
