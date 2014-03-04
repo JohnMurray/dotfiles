@@ -71,3 +71,9 @@ function! CleverTab()
   endif
 endfunction
 inoremap <Tab> <C-R>=CleverTab()<CR>
+
+
+" Easy switch buffers
+nmap <C-e> :e#<CR>
+nmap <C-n> :bnext<CR>
+nmap <C-p> :bprev<CR>
