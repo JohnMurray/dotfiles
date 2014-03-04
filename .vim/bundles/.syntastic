@@ -1,0 +1,3 @@
+update: 'git clone https://github.com/scrooloose/syntastic.git'
+pre_update: 'rm -rf syntastic/'
+post_update: 'rm -rf syntastic/.git/'

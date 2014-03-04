@@ -1,0 +1,3 @@
+update: 'git clone https://github.com/elzr/vim-json'
+pre_update: 'rm -rf json/'
+post_update: 'rm -rf json/.git/'
