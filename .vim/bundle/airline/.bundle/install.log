@@ -1,0 +1,6 @@
+# Logfile created on 2014-03-09 01:38:30 -0500 by logger.rb/44203
+I, [2014-03-09T01:38:30.154802 #62394]  INFO -- : 0:  blankslate (2.1.2.4) from /Users/jmurray/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/specifications/blankslate-2.1.2.4.gemspec
+I, [2014-03-09T01:38:30.156013 #62394]  INFO -- : 0:  parslet (1.5.0) from /Users/jmurray/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/specifications/parslet-1.5.0.gemspec
+I, [2014-03-09T01:38:30.156536 #62394]  INFO -- : 0:  thor (0.18.1) from /Users/jmurray/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/specifications/thor-0.18.1.gemspec
+I, [2014-03-09T01:38:30.157758 #62394]  INFO -- : 0:  vim-flavor (1.1.5) from /Users/jmurray/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/specifications/vim-flavor-1.1.5.gemspec
+I, [2014-03-09T01:38:30.158659 #62394]  INFO -- : 0:  bundler (1.5.1) from /Users/jmurray/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/specifications/bundler-1.5.1.gemspec
