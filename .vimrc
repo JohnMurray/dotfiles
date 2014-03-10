@@ -1,5 +1,7 @@
 " load Pathogen (for plugin management)
 execute pathogen#infect()
+Helptags
+set laststatus=2
 
 
 " use vim defaults and set basic config
@@ -77,3 +79,10 @@ inoremap <Tab> <C-R>=CleverTab()<CR>
 nmap <C-e> :e#<CR>
 nmap <C-n> :bnext<CR>
 nmap <C-p> :bprev<CR>
+
+
+" Terminal Settings to make airline work better
+set term=xterm-256color
+set termencoding=utf-8
+set encoding=utf-8
+let g:airline_powerline_fonts = 1
