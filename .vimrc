@@ -10,6 +10,7 @@ syntax on
 set number
 set cursorline
 set ruler
+set backspace=indent,eol,start
 
 " search settings
 set ignorecase
