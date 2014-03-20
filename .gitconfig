@@ -42,3 +42,9 @@
 [core]
 	autocrlf = false
 	editor = vim
+
+[push]
+  default = upstream
+
+[branch]
+	autosetuprebase = always
