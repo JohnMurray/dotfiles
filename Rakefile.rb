@@ -1,5 +1,6 @@
 require 'rake'
 require 'fileutils'
+require 'yaml'
 
 task :default => [:deploy]
 task :deploy => [:deploy_contrib, :deploy_bin, :deploy_config]
@@ -55,5 +56,64 @@ task :deploy_contrib do
       end
     end
   end
+end
+
+
+
+##----
+## Find all the '.upgrade' YAML files and execute the upgrade commands
+##----
+task :upgrade_vim_addons do
+  puts "Upgrading Vim Addons"
+  Dir.chdir('.vim') do 
+    upgrade_dir('*')
+  end
+end
+
+
+def upgrade_dir(dir_glob) 
+  Dir.glob(dir_glob, File::FNM_DOTMATCH).each do |file|
+    next if ['.', '..'].include? file
+    if File.directory? file
+      Dir.chdir(file) { upgrade_dir('*') }
+    else
+      run_upgrade(load_yaml_config(file))
+    end
+  end
+end
+
+def load_yaml_config(config_file)
+  if config_file =~ /.+\.up$/
+    addon_name = config_file.gsub(/^\./, '').gsub(/\.up$/, '')
+    puts "\tUpgrading #{addon_name}"
+    begin
+      return YAML::load_file(config_file)
+    rescue Psych::SyntaxError => err
+      puts "\tCould not upgrade #{addon_name}. Not valid YAML file"
+      puts "\t => #{err.message}"
+      puts ''
+    end
+  end
+end
+
+
+def run_upgrade(config)
+  return unless config
+
+  [:pre_update, :update, :post_update].each do |key|
+    if config.has_key? key
+      if (config[key] || []).is_a? Array
+        config[key].each { |cmd| run_command(cmd) }
+      else
+        run_command(config[key])
+      end
+    end
+  end
+end
+
+
+def run_command(cmd)
+  puts "\t\t#{cmd}"
+  `#{cmd}`
 end
 
