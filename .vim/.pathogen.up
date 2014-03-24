@@ -1,2 +1,2 @@
-update: 'curl -Sso autoload/pathogen.vim https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim'
-pre_update: 'rm autoload/pathogen.vim'
+:update: 'curl -Sso autoload/pathogen.vim https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim'
+:pre_update: 'rm autoload/pathogen.vim'
