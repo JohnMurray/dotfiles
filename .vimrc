@@ -88,6 +88,10 @@ set termencoding=utf-8
 set encoding=utf-8
 let g:airline_powerline_fonts = 1
 
-" nerd-tree
+" NERD-tree
 map <F2> :NERDTreeToggle<CR>
+" close vim if nerd-tree is only window open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" open nerd-tree is no files specified on vim-open
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
