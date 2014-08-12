@@ -90,3 +90,4 @@ let g:airline_powerline_fonts = 1
 
 " nerd-tree
 map <F2> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
