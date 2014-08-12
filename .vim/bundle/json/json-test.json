@@ -4,7 +4,13 @@
 	unquotedKeyword:'singleQuotedString',
 	'singleQuotedKeyword':true,
 	"decimalCantStartWithPeriod":.1,
+	"semicolonAtEndOfThisObject":"trailingComma",
 };
+
+{
+  "object1": "missingComma"
+  "object2": "value"
+}
 
 // normative JSON examples from http://json.org/example.html
 

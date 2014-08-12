@@ -6,6 +6,11 @@ if !exists("g:vim_json_syntax_conceal")
 	let g:vim_json_syntax_conceal = 1
 end
 
+"have warnings by default
+if !exists("g:vim_json_warnings")
+	let g:vim_json_warnings = 1
+end
+
 "set concealcursor blank by default
 "this should turn off the concealing in the current line (where the cursor is at),
 "on all modes (normal, visual, insert)
