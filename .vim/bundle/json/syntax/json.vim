@@ -1,8 +1,7 @@
 " Vim syntax file
 " Language:	JSON
-" Maintainer:	Eli Parra <eli@elzr.com>
-" Last Change:	2013-02-01
-" Version:      0.12
+" Maintainer:	Eli Parra <eli@elzr.com> https://github.com/elzr/vim-json
+" Last Change:	2014-08-24 HiLink to hi def link
 
 if !exists("main_syntax")
   if version < 600
@@ -31,7 +30,7 @@ syn region  jsonStringSQError oneline  start=+'+  skip=+\\\\\|\\"+  end=+'+
 
 " Syntax: JSON Keywords
 " Separated into a match and region because a region by itself is always greedy
-syn match  jsonKeywordMatch /"[^\"]\+"[[:blank:]\r\n]*\:/ contains=jsonKeyword
+syn match  jsonKeywordMatch /"\([^"]\|\\\"\)\+"[[:blank:]\r\n]*\:/ contains=jsonKeyword
 if has('conceal')
    syn region  jsonKeyword matchgroup=jsonQuote start=/"/  end=/"\ze[[:blank:]\r\n]*\:/ concealends contained
 else
@@ -48,7 +47,7 @@ syn match   jsonNumber    "-\=\<\%(0\|[1-9]\d*\)\%(\.\d\+\)\=\%([eE][-+]\=\d\+\)
 " ERROR WARNINGS **********************************************
 if (!exists("g:vim_json_warnings") || g:vim_json_warnings==1)
 	" Syntax: Strings should always be enclosed with quotes.
-	syn match   jsonNoQuotesError  "\<[[:alpha:]]\+\>"
+	syn match   jsonNoQuotesError  "\<[[:alpha:]][[:alnum:]]*\>"
 	syn match   jsonTripleQuotesError  /"""/
 
 	" Syntax: An integer part of 0 followed by other digits is not allowed.
@@ -68,7 +67,10 @@ if (!exists("g:vim_json_warnings") || g:vim_json_warnings==1)
 	syn match   jsonTrailingCommaError  ",\_s*[}\]]"
 
 	" Syntax: Watch out for missing commas between elements
-	syn match   jsonMissingCommaError /\("\|\d\)\zs\_s\+\ze"/
+	syn match   jsonMissingCommaError /\("\|\]\|\d\)\zs\_s\+\ze"/
+	syn match   jsonMissingCommaError /\(\]\|\}\)\_s\+\ze"/ "arrays/objects as values
+	syn match   jsonMissingCommaError /}\_s\+\ze{/ "objects as elements in an array
+	syn match   jsonMissingCommaError /\(true\|false\)\_s\+\ze"/ "true/false as value
 endif
 
 " ********************************************** END OF ERROR WARNINGS
@@ -80,51 +82,39 @@ syn match  jsonPadding "\%^[[:blank:]\r\n]*[_$[:alpha:]][_$[:alnum:]]*[[:blank:]
 syn match  jsonPadding ");[[:blank:]\r\n]*\%$"
 
 " Syntax: Boolean
-syn keyword  jsonBooleanTrue true
-syn keyword  jsonBooleanFalse false
+syn match  jsonBoolean /\(true\|false\)\(\_s\+\ze"\)\@!/
 
 " Syntax: Null
 syn keyword  jsonNull      null
 
 " Syntax: Braces
-syn region  jsonFold matchgroup=jsonBraces start="{" end="}" transparent fold
-syn region  jsonFold matchgroup=jsonBraces start="\[" end="]" transparent fold
+syn region  jsonFold matchgroup=jsonBraces start="{" end=/}\(\_s\+\ze\("\|{\)\)\@!/ transparent fold
+syn region  jsonFold matchgroup=jsonBraces start="\[" end=/]\(\_s\+\ze"\)\@!/ transparent fold
 
 " Define the default highlighting.
-" For version 5.7 and earlier: only when not done already
-" For version 5.8 and later: only when an item doesn't have highlighting yet
 if version >= 508 || !exists("did_json_syn_inits")
-  if version < 508
-    let did_json_syn_inits = 1
-    command -nargs=+ HiLink hi link <args>
-  else
-    command -nargs=+ HiLink hi def link <args>
-  endif
-  HiLink jsonPadding         Operator
-  HiLink jsonString          String
-  HiLink jsonTest          Label
-  HiLink jsonEscape          Special
-  HiLink jsonNumber          Number
-  HiLink jsonBraces          Delimiter
-  HiLink jsonNull            Function
-  HiLink jsonBooleanTrue     jsonBoolean
-  HiLink jsonBooleanFalse    jsonBoolean
-  HiLink jsonBoolean         Boolean
-  HiLink jsonKeyword         Label
+  hi def link jsonPadding		Operator
+  hi def link jsonString		String
+  hi def link jsonTest			Label
+  hi def link jsonEscape		Special
+  hi def link jsonNumber		Number
+  hi def link jsonBraces		Delimiter
+  hi def link jsonNull			Function
+  hi def link jsonBoolean		Boolean
+  hi def link jsonKeyword		Label
 
 	if (!exists("g:vim_json_warnings") || g:vim_json_warnings==1)
-	  HiLink jsonNumError        Error
-	  HiLink jsonCommentError    Error
-	  HiLink jsonSemicolonError  Error
-	  HiLink jsonTrailingCommaError     Error
-	  HiLink jsonMissingCommaError      Error
-	  HiLink jsonStringSQError        	Error
-	  HiLink jsonNoQuotesError        	Error
-	  HiLink jsonTripleQuotesError     	Error
+		hi def link jsonNumError					Error
+		hi def link jsonCommentError				Error
+		hi def link jsonSemicolonError			Error
+		hi def link jsonTrailingCommaError		Error
+		hi def link jsonMissingCommaError		Error
+		hi def link jsonStringSQError				Error
+		hi def link jsonNoQuotesError				Error
+		hi def link jsonTripleQuotesError		Error
   endif
-  HiLink jsonQuote           Quote
-  HiLink jsonNoise           Noise
-  delcommand HiLink
+  hi def link jsonQuote			Quote
+  hi def link jsonNoise			Noise
 endif
 
 let b:current_syntax = "json"

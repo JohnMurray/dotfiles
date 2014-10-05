@@ -7,10 +7,6 @@
 	"semicolonAtEndOfThisObject":"trailingComma",
 };
 
-{
-  "object1": "missingComma"
-  "object2": "value"
-}
 
 // normative JSON examples from http://json.org/example.html
 
@@ -75,3 +71,25 @@
         "onMouseUp": "sun1.opacity = (sun1.opacity / 100) * 90;"
     }
 }}    
+
+//missing comma errors
+{
+  "object1": "missingComma"
+  "object2": "value"
+}
+[
+  { "object1": 1 }
+  { "object2": 2 }
+]
+{
+  "object1": []
+  "object2": []
+}
+{
+  "object1": {}
+  "object2": []
+}
+{
+  "object1": true
+  "object2": 2
+}
