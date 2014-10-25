@@ -80,6 +80,7 @@ inoremap <Tab> <C-R>=CleverTab()<CR>
 nmap <C-e> :e#<CR>
 nmap <C-n> :bnext<CR>
 nmap <C-p> :bprev<CR>
+nmap <C-c> :bp\|bd #<CR>
 
 
 " Terminal Settings to make airline work better
