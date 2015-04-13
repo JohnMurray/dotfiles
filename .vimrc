@@ -59,6 +59,13 @@ if has("autocmd")
 endif
 
 
+" If we are running in GUI mode, set some colors
+if has("gui_running")
+  colorscheme solarized
+  set background=dark
+endif
+
+
 " highlight TODO markers
 hi Todo ctermbg=Black ctermfg=DarkMagenta
 
