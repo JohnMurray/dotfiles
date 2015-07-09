@@ -1,4 +1,4 @@
-" MIT License. Copyright (c) 2013-2014 Bailey Ling.
+" MIT License. Copyright (c) 2013-2015 Bailey Ling.
 " vim: et ts=2 sts=2 sw=2
 
 let s:parts = {}
@@ -52,6 +52,10 @@ endfunction
 
 function! airline#parts#mode()
   return get(w:, 'airline_current_mode', '')
+endfunction
+
+function! airline#parts#crypt()
+  return g:airline_detect_crypt && exists("+key") && !empty(&key) ? g:airline_symbols.crypt : ''
 endfunction
 
 function! airline#parts#paste()

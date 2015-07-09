@@ -4,65 +4,33 @@ if exists("g:go_loaded_install")
 endif
 let g:go_loaded_install = 1
 
+
 " these packages are used by vim-go and can be automatically installed if
 " needed by the user with GoInstallBinaries
 let s:packages = [
-            \ "github.com/nsf/gocode", 
-            \ "code.google.com/p/go.tools/cmd/goimports", 
-            \ "code.google.com/p/rog-go/exp/cmd/godef", 
-            \ "code.google.com/p/go.tools/cmd/oracle", 
-            \ "code.google.com/p/go.tools/cmd/gorename",
-            \ "github.com/golang/lint/golint", 
+            \ "github.com/nsf/gocode",
+            \ "golang.org/x/tools/cmd/goimports",
+            \ "github.com/rogpeppe/godef",
+            \ "golang.org/x/tools/cmd/oracle",
+            \ "golang.org/x/tools/cmd/gorename",
+            \ "github.com/golang/lint/golint",
             \ "github.com/kisielk/errcheck",
             \ "github.com/jstemmer/gotags",
             \ ]
 
-" Commands
-command! GoErrCheck call go#errcheck#Run()
-
+" These commands are available on any filetypes
 command! GoInstallBinaries call s:GoInstallBinaries(-1)
 command! GoUpdateBinaries call s:GoInstallBinaries(1)
+command! -nargs=? -complete=dir GoPath call go#path#GoPath(<f-args>)
 
-
-" GetBinPath returns the binary path of installed go tools
-function! GetBinPath()
-    let bin_path = ""
-
-    " check if our global custom path is set, if not check if $GOBIN is set so
-    " we can use it, otherwise use $GOPATH + '/bin'
-    if exists("g:go_bin_path")
-        let bin_path = g:go_bin_path
-    elseif $GOBIN != ""
-        let bin_path = $GOBIN
-    elseif $GOPATH != ""
-        " take care of multi element GOPATH's
-        let go_paths = split($GOPATH, ":")
-
-        if len(go_paths) == 1 
-            " one single PATH
-            let bin_path = $GOPATH . '/bin/'
-        else
-            " multiple paths, use the first one
-            let bin_path = go_paths[0]. '/bin/'
-        endif
-    else
-        " could not find anything
-        return ""
-    endif
-
-    " add trailing slash if there is no one
-    if bin_path[-1:-1] != '/' | let bin_path .= '/' | endif
-
-    return bin_path
-endfunction
 
 " GoInstallBinaries downloads and install all necessary binaries stated in the
 " packages variable. It uses by default $GOBIN or $GOPATH/bin as the binary
 " target install directory. GoInstallBinaries doesn't install binaries if they
 " exist, to update current binaries pass 1 to the argument.
-function! s:GoInstallBinaries(updateBinaries) 
+function! s:GoInstallBinaries(updateBinaries)
     if $GOPATH == ""
-        echohl Error 
+        echohl Error
         echomsg "vim.go: $GOPATH is not set"
         echohl None
         return
@@ -73,7 +41,7 @@ function! s:GoInstallBinaries(updateBinaries)
         return
     endif
 
-    let go_bin_path = GetBinPath()
+    let go_bin_path = go#path#BinPath()
 
     " change $GOBIN so go get can automatically install to it
     let $GOBIN = go_bin_path
@@ -82,7 +50,26 @@ function! s:GoInstallBinaries(updateBinaries)
     let old_path = $PATH
 
     " vim's executable path is looking in PATH so add our go_bin path to it
-    let $PATH = $PATH . ":" .go_bin_path
+    let $PATH = $PATH . go#util#PathListSep() .go_bin_path
+
+    " when shellslash is set on MS-* systems, shellescape puts single quotes
+    " around the output string. cmd on Windows does not handle single quotes
+    " correctly. Unsetting shellslash forces shellescape to use double quotes
+    " instead.
+    let resetshellslash = 0
+    if has('win32') && &shellslash
+        let resetshellslash = 1
+        set noshellslash
+    endif
+
+    let cmd = "go get -u -v "
+
+    let s:go_version = matchstr(system("go version"), '\d.\d.\d')
+
+    " https://github.com/golang/go/issues/10791
+    if s:go_version > "1.4.0" && s:go_version < "1.5.0"
+        let cmd .= "-f " 
+    endif
 
     for pkg in s:packages
         let basename = fnamemodify(pkg, ":t")
@@ -94,13 +81,14 @@ function! s:GoInstallBinaries(updateBinaries)
         endif
 
         if !executable(bin) || a:updateBinaries == 1
-            if a:updateBinaries == 1 
+            if a:updateBinaries == 1
                 echo "vim-go: Updating ". basename .". Reinstalling ". pkg . " to folder " . go_bin_path
             else
                 echo "vim-go: ". basename ." not found. Installing ". pkg . " to folder " . go_bin_path
             endif
 
-            let out = system("go get -u -v ".shellescape(pkg))
+
+            let out = system(cmd . shellescape(pkg))
             if v:shell_error
                 echo "Error installing ". pkg . ": " . out
             endif
@@ -109,6 +97,9 @@ function! s:GoInstallBinaries(updateBinaries)
 
     " restore back!
     let $PATH = old_path
+    if resetshellslash
+        set shellslash
+    endif
 endfunction
 
 " CheckBinaries checks if the necessary binaries to install the Go tool
@@ -123,12 +114,25 @@ function! s:CheckBinaries()
         echohl Error | echomsg "vim-go: git executable not found." | echohl None
         return -1
     endif
-
-    if !executable('hg')
-        echohl Error | echomsg "vim.go: hg (mercurial) executable not found." | echohl None
-        return -1
-    endif
 endfunction
+
+" Autocommands
+" ============================================================================
+
+augroup vim-go
+    autocmd!
+
+    " GoInfo automatic update
+    if get(g:, "go_auto_type_info", 0)
+        autocmd CursorHold *.go nested call go#complete#Info()
+    endif
+
+    " code formatting on save
+    if get(g:, "go_fmt_autosave", 1)
+        autocmd BufWritePre *.go call go#fmt#Format(-1)
+    endif
+
+augroup END
 
 
 " vim:ts=4:sw=4:et

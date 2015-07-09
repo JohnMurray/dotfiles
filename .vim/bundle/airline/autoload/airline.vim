@@ -1,4 +1,4 @@
-" MIT License. Copyright (c) 2013-2014 Bailey Ling.
+" MIT License. Copyright (c) 2013-2015 Bailey Ling.
 " vim: et ts=2 sts=2 sw=2
 
 let g:airline_statusline_funcrefs = get(g:, 'airline_statusline_funcrefs', [])
@@ -46,6 +46,7 @@ function! airline#load_theme()
 
   call airline#highlighter#load_theme()
   call airline#extensions#load_theme()
+  call airline#update_statusline()
 endfunction
 
 function! airline#switch_theme(name)
@@ -62,7 +63,6 @@ function! airline#switch_theme(name)
   endtry
 
   let w:airline_lastmode = ''
-  call airline#update_statusline()
   call airline#load_theme()
 
   " this is required to prevent clobbering the startup info message, i don't know why...
@@ -89,6 +89,9 @@ endfunction
 
 function! airline#update_statusline()
   for nr in filter(range(1, winnr('$')), 'v:val != winnr()')
+    if airline#util#getwinvar(nr, 'airline_disabled', 0)
+      continue
+    endif
     call setwinvar(nr, 'airline_active', 0)
     let context = { 'winnr': nr, 'active': 0, 'bufnr': winbufnr(nr) }
     call s:invoke_funcrefs(context, s:inactive_funcrefs)
@@ -139,6 +142,8 @@ function! airline#check_mode(winnr)
       let l:mode = ['replace']
     elseif l:m =~# '\v(v|V||s|S|)'
       let l:mode = ['visual']
+    elseif l:m ==# "t"
+      let l:mode = ['terminal']
     else
       let l:mode = ['normal']
     endif
@@ -154,6 +159,10 @@ function! airline#check_mode(winnr)
 
   if g:airline_detect_paste && &paste
     call add(l:mode, 'paste')
+  endif
+
+  if g:airline_detect_crypt && exists("+key") && !empty(&key)
+    call add(l:mode, 'crypt')
   endif
 
   if &readonly || ! &modifiable

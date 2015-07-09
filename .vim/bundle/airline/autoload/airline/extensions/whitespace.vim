@@ -1,4 +1,4 @@
-" MIT License. Copyright (c) 2013-2014 Bailey Ling.
+" MIT License. Copyright (c) 2013-2015 Bailey Ling.
 " vim: et ts=2 sts=2 sw=2
 
 " http://got-ravings.blogspot.com/2008/10/vim-pr0n-statusline-whitespace-flags.html
@@ -27,9 +27,11 @@ function! s:check_mixed_indent()
     " spaces before or between tabs are not allowed
     let t_s_t = '(^\t* +\t\s*\S)'
     " <tab>(<space> x count)
-    " count of spaces at the end of tabs should be less then tabstop value
+    " count of spaces at the end of tabs should be less than tabstop value
     let t_l_s = '(^\t+ {' . &ts . ',}' . '\S)'
     return search('\v' . t_s_t . '|' . t_l_s, 'nw')
+  elseif s:indent_algo == 2
+    return search('\v(^\t* +\t\s*\S)', 'nw')
   else
     return search('\v(^\t+ +)|(^ +\t+)', 'nw')
   endif
@@ -67,7 +69,7 @@ function! airline#extensions#whitespace#check()
     endif
   endif
   return b:airline_whitespace_check
-endfunction!
+endfunction
 
 function! airline#extensions#whitespace#toggle()
   if s:enabled

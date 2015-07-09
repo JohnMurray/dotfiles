@@ -35,7 +35,7 @@ function! s:godocWord(args)
     if !executable('godoc')
         echohl WarningMsg
         echo "godoc command not found."
-        echo "  install with: go get code.google.com/p/go.tools/cmd/godoc"
+        echo "  install with: go get golang.org/x/tools/cmd/godoc"
         echohl None
         return []
     endif
@@ -51,7 +51,7 @@ function! s:godocWord(args)
         let words = a:args
     endif
 
-    if !len(words) 
+    if !len(words)
         return []
     endif
 
@@ -71,6 +71,14 @@ function! s:godocWord(args)
     return [pkg, exported_name]
 endfunction
 
+function! s:godocNotFound(content)
+    if len(a:content) == 0
+        return 1
+    endif
+
+    return a:content =~# '^.*: no such file or directory\n$'
+endfunction
+
 function! go#doc#OpenBrowser(...)
     let pkgs = s:godocWord(a:000)
     if empty(pkgs)
@@ -85,7 +93,7 @@ function! go#doc#OpenBrowser(...)
     call go#tool#OpenBrowser(godoc_url)
 endfunction
 
-function! go#doc#Open(mode, ...)
+function! go#doc#Open(newmode, mode, ...)
     let pkgs = s:godocWord(a:000)
     if empty(pkgs)
         return
@@ -97,15 +105,19 @@ function! go#doc#Open(mode, ...)
     let command = g:go_doc_command . ' ' . g:go_doc_options . ' ' . pkg
 
     silent! let content = system(command)
-    if v:shell_error || !len(content)
+    if v:shell_error || s:godocNotFound(content)
         echo 'No documentation found for "' . pkg . '".'
         return -1
     endif
 
-    call s:GodocView(a:mode, content)
+    call s:GodocView(a:newmode, a:mode, content)
+
+    if exported_name == ''
+        silent! normal gg
+        return -1
+    endif
 
     " jump to the specified name
-
     if search('^func ' . exported_name . '(')
         silent! normal zt
         return -1
@@ -125,11 +137,11 @@ function! go#doc#Open(mode, ...)
     silent! normal gg
 endfunction
 
-function! s:GodocView(position, content)
+function! s:GodocView(newposition, position, content)
     " reuse existing buffer window if it exists otherwise create a new one
     if !bufexists(s:buf_nr)
-        execute a:position
-        file `="[Godoc]"`
+        execute a:newposition
+        sil file `="[Godoc]"`
         let s:buf_nr = bufnr('%')
     elseif bufwinnr(s:buf_nr) == -1
         execute a:position
@@ -149,9 +161,9 @@ function! s:GodocView(position, content)
     setlocal iskeyword-=-
 
     setlocal modifiable
-    %delete _ 
+    %delete _
     call append(0, split(a:content, "\n"))
-    $delete _ 
+    sil $delete _
     setlocal nomodifiable
 endfunction
 
