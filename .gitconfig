@@ -34,6 +34,8 @@
 	df = diff
 	lg = log -p
   su = submodule update
+  pu = !sh git rev-parse --abbrev-ref HEAD | xargs git push origin
+  puf = !sh git rev-parse --abbrev-ref HEAD | xargs git push -f origin
   alias = "config --get-regexp 'alias.*'"
   lol = log --pretty=oneline --abbrev-commit --graph --decorate
   tag-commit = !sh -c 'git rev-list $0 | head -n1 | xargs git log -n1'

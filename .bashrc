@@ -80,3 +80,18 @@ fi
 if [ -e "$HOME/.bash_etc" ] ; then
   . "$HOME/.bash_etc"
 fi
+
+
+
+
+##
+## Git Stuffs
+##
+
+g() {
+  if [[ $# -gt 0 ]] ; then
+    git $@
+  else
+    git status
+  fi
+}
