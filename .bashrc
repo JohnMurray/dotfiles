@@ -33,6 +33,8 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\][$shorthost]
 # Ensure that the prompt starts at the far-left side (remove ^C crap and what not)
 # From: http://jonisalonen.com/2012/your-bash-prompt-needs-this/
 PS1="\[\033[G\]$PS1"
+# lead with a new line
+PS1="\n$PS1"
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
