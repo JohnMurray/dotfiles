@@ -2,7 +2,10 @@ require 'rake'
 require 'fileutils'
 require 'yaml'
 
+desc "Runs 'deploy' task"
 task :default => [:deploy]
+
+desc "Deploy all the things!!!"
 task :deploy => [:deploy_contrib, :deploy_bin, :deploy_config]
  
 
@@ -10,6 +13,7 @@ task :deploy => [:deploy_contrib, :deploy_bin, :deploy_config]
 ## Copy all of the configuration file out into the $HOME directory of the
 ## current user. (all files/folders starting with a "dot" except ".git/")
 ##----
+desc "Deploy all the 'dot-files' to ~"
 task :deploy_config do
   puts "Copying Config Files"
   Dir[".[^.]*"].each do |file|
@@ -25,6 +29,7 @@ end
 ## Copy all of the files in ./bin to $HOME/bin and ensure that the $HOME/bin
 ## directory exists.
 ##----
+desc "Deploy the files in bin/ to ~/bin/"
 task :deploy_bin do
   puts "Deploying ./bin Files"
   FileUtils.mkdir_p(File.join(Dir.home, 'bin'))
@@ -42,6 +47,7 @@ end
 ## Copy all of the files in ./contrib/$PROJECT_NAME to the $HOME dir in the
 ## same strucutre that exists below ./contrib/$PROJECT_NAME.
 ##----
+desc "Deploy the contrib files from the contrib/ directory"
 task :deploy_contrib do
   puts "Deploying ./contrib Files"
   Dir.chdir('contrib') do
@@ -63,6 +69,7 @@ end
 ##----
 ## Find all the '.upgrade' YAML files and execute the upgrade commands
 ##----
+desc "Upgrade all the vim addons using the '.up' files in .vim/bundles/"
 task :upgrade_vim_addons do
   puts "Upgrading Vim Addons"
   Dir.chdir('.vim') do 
