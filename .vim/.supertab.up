@@ -1,2 +1,2 @@
-:update: 'curl -Sso plugin/supertab.vim https://raw.github.com/ervandew/supertab/master/plugin/supertab.vim'
-:pre_update: ['rm plugin/supertab.vim', 'rm plugin/supertab.vmb']
+:update: 'curl -Sso plugin/supertab.vim https://raw.githubusercontent.com/ervandew/supertab/master/plugin/supertab.vim'
+:pre_update: 'rm plugin/supertab.vim'
