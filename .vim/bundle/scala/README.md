@@ -1,5 +1,5 @@
-vim-scala [![Build Status](https://secure.travis-ci.org/lenniboy/vim-scala.png)](http://travis-ci.org/lenniboy/vim-scala)
-==========
+vim-scala
+=========
 
 This is a "bundle" for Vim that builds off of the initial Scala plugin modules
 by Stefan Matthias Aust and adds some more "stuff" that I find useful, including
@@ -13,7 +13,7 @@ You really should be using Tim Pope's [Pathogen](https://github.com/tpope/vim-pa
 
 Using wget:
 
-```mkdir -p ~/.vim/{ftdetect,indent,syntax} && for d in ftdetect indent syntax ; do wget --no-check-certificate -O ~/.vim/$d/scala.vim https://raw.githubusercontent.com/derekwyatt/vim-scala/master/$d/scala.vim; done```
+```mkdir -p ~/.vim/{ftdetect,indent,syntax} && for d in ftdetect indent syntax ; do wget -O ~/.vim/$d/scala.vim https://raw.githubusercontent.com/derekwyatt/vim-scala/master/$d/scala.vim; done```
 
 Using cURL:
 
