@@ -8,6 +8,10 @@ for how to update the plugin. To run the update (from the project root), run
 rake update_vim_addons
 ```
 
+## package manager
+
+All of my bundles are managed via Pathogen (update command in `.pathogen.up`)
+
 ## bundles
 + `airline` (like powerline for vim)
 + `ctrlp` (fuzzy file search)

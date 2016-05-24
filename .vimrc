@@ -26,7 +26,6 @@ if has("autocmd")
   filetype indent on
   set sw=2
   set ts=2
-  autocmd FileType php setlocal noexpandtab
 endif
 
 " Set absolute-vs-relative numbering
@@ -87,7 +86,7 @@ inoremap <Tab> <C-R>=CleverTab()<CR>
 " Easy switch buffers
 nmap <C-e> :e#<CR>
 nmap <C-n> :bnext<CR>
-nmap <C-p> :bprev<CR>
+nmap <C-o> :bprev<CR>
 nmap <C-c> :bp\|bd #<CR>
 
 
@@ -104,3 +103,11 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " open nerd-tree is no files specified on vim-open
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+
+
+
+"
+" Language Specific Settings
+"
+autocmd FileType php setlocal noexpandtab
