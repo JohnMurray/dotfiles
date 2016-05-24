@@ -26,6 +26,7 @@ if has("autocmd")
   filetype indent on
   set sw=2
   set ts=2
+  autocmd FileType php setlocal noexpandtab
 endif
 
 " Set absolute-vs-relative numbering

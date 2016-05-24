@@ -1,30 +1,21 @@
 # .vim/
 
-Here in lie all the vim configs and what not. Here's
-what I'm currently using and links to their home pages:
+Here in lie all the vim configs and what not. Here's a list of the plugins that
+I'm currently using. Each plugin also has a hidden `.up` file that contains commands
+for how to update the plugin. To run the update (from the project root), run
 
+```bash
+rake update_vim_addons
+```
 
-### SuperTab
-
-- Version: 2.0
-- Homepage: http://www.vim.org/scripts/script.php?script_id=1643
-
-### Pathogen
-
-- Version 2014-02-24 (master)
-- Homepage: https://github.com/tpope/vim-pathogen
-
-### json-vim
-
-- Version: 2013 sometime (master)
-- Homepage: https://github.com/elzr/vim-json
-
-### markdown-vim
-
-- Version 2014-02-24 (master)
-- Homepage: https://github.com/tpope/vim-markdown
-
-### ruby-vim
-
-- Version: 2014-02-24 (master)
-- Homepage: https://github.com/vim-ruby/vim-ruby
+## bundles
++ `airline` (like powerline for vim)
++ `ctrlp` (fuzzy file search)
++ `json`
++ `markdown`
++ `nerdtree` (file explorer)
++ `ruby`
++ `rust`
++ `scala`
++ `vim-go`
++ `supertab` (tab completion)

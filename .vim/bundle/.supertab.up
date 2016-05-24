@@ -1,0 +1,3 @@
+:update: 'git clone https://github.com/ervandew/supertab.git supertab'
+:pre_update: 'rm -rf supertab/'
+:post_update: 'rm -rf supertab/.git'
