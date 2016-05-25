@@ -5,7 +5,7 @@ export ZSH=/Users/jmurray/.zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="agnoster"
+ZSH_THEME="avit"
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
@@ -41,3 +41,49 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 
 EDITOR='vim'
+
+# See https://github.com/chriskempson/base16-shell for more themes
+BASE16_SHELL="$HOME/.config/base16-eighties.dark.sh"
+[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+
+
+
+function  ldap-group() {
+  CMD="ldapsearch -h ad.corp.appnexus.com -x -b dc=ad,dc=corp,dc=appnexus,dc=com -D 'ad\jmurray' -x -W '(proxyAddresses=smtp:$1@appnexus.com)' | grep 'member: CN=' | sed 's/,.*$//' | sed 's/^.*=//'"
+  eval "${CMD}"
+}
+
+function ldap-groups() {
+  CMD=""
+  CMD="ldapsearch -h ad.corp.appnexus.com -x -b dc=ad,dc=corp,dc=appnexus,dc=com -D 'ad\jmurray' -x -W '(cn=$1)' | grep 'memberOf' | sed 's/,.*$//' | sed 's/^.*=//'"
+  eval "${CMD}"
+}
+
+alias jump='ssh -At jump.adnxs.net'
+function ago() {
+# a function to use go on jump with a couple of improvements
+ 
+  if [ $# -eq 0 ]; then 
+      # 0 arg supplied, check if clipboard has hostname and if it looks right, ssh to it
+      h=`/usr/bin/pbpaste`
+      if [ `echo $h | perl -ne 'if (/^\d{2,}\.[\w-]+\.[\w-]+\.\w{3,4}$/) {print 1;} else { print 0; }'` -eq 1 ]; then
+   ssh $h
+   exit
+      fi
+  fi
+ 
+ 
+  if [ $# -eq 1 ]; then 
+      if [ `echo $1 | perl -ne 'if (/^\d{2,}\.[\w-]+\.[\w-]+\.\w{3,4}$/) {print 1;} else { print 0; }'` -eq 1 ]; then
+       # 1 arg supplied, probably well-formed hostname as it matched regexp, so try ssh directly
+   ssh $1
+   exit
+      fi
+  fi
+ 
+  jump /usr/bin/go $@
+}
+
+function m {
+  ago "murray" $@
+}
