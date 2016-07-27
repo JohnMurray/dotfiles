@@ -1,3 +1,0 @@
-:update: 'git clone git://github.com/scrooloose/nerdtree.git nerdtree'
-:pre_update: 'rm -rf nerdtree/'
-:post_update: 'rm -rf nerdtree/.git'

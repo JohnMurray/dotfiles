@@ -1,3 +1,0 @@
-:update: 'git clone https://github.com/rust-lang/rust.vim.git rust'
-:pre_update: 'rm -rf rust/'
-:post_update: 'rm -rf rust/.git'

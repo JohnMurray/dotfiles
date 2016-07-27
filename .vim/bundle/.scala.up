@@ -1,3 +1,0 @@
-:update: 'git clone https://github.com/derekwyatt/vim-scala.git scala'
-:pre_update: 'rm -rf scala/'
-:post_update: 'rm -rf scala/.git'

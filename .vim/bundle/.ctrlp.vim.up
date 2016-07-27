@@ -1,3 +1,0 @@
-:update: 'git clone https://github.com/ctrlpvim/ctrlp.vim.git ctrlp.vim'
-:pre_update: 'rm -rf ctrlp.vim/'
-:post_update: 'rm -rf ctrlp.vim/.git'

@@ -1,3 +1,0 @@
-:update: 'git clone https://github.com/StanAngeloff/php.vim.git php.vim'
-:pre_update: 'rm -rf php.vim/'
-:post_update: 'rm -rf php.vim/.git'
