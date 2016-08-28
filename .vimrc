@@ -172,7 +172,13 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " TagBar
-let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+if has("unix")
+  let s:uname = system("uname -s")
+  if s:uname == "Darwin"
+    " Do Mac stuff here
+    let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+  endif
+endif
 let g:tagbar_width=30
 autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx,*.rs call tagbar#autoopen()
 " TagBar - Rust support
