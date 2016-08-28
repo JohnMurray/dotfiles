@@ -267,3 +267,7 @@ if has('cscope')
   command -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
 endif
 
+
+" Rust
+autocmd FileType rust setlocal tags=./rusty-tags.vi;/
+autocmd BufWrite *.rs :silent exec "!rusty-tags vi --start-dir=" . expand('%:p:h') . "&"
