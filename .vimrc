@@ -270,4 +270,4 @@ endif
 
 " Rust
 autocmd FileType rust setlocal tags=./rusty-tags.vi;/
-autocmd BufWrite *.rs :silent exec "!rusty-tags vi --start-dir=" . expand('%:p:h') . "&"
+autocmd BufWrite *.rs :silent exec "!rusty-tags vi --start-dir=" . expand('%:p:h') . " > /dev/null 2>&1 &"
