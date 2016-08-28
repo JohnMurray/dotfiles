@@ -13,6 +13,11 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+" Misc
+Plug 'godlygeek/tabular'
+Plug 'vim-scripts/winmanager'
+Plug 'majutsushi/tagbar', { 'for': ['c', 'cpp', 'rust', 'h', 'cc', 'cxx'] }
+
 " Colors
 Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/base16-vim'
@@ -25,6 +30,7 @@ Plug 'vim-ruby/vim-ruby',       { 'for': 'ruby'     }
 Plug 'rust-lang/rust.vim',      { 'for': 'rust'     }
 Plug 'derekwyatt/vim-scala',    { 'for': 'scala'    }
 Plug 'fatih/vim-go',            { 'for': 'go'       }
+Plug 'cespare/vim-toml',        { 'for': 'toml'     }
 
 " fancy statusline
 Plug 'vim-airline/vim-airline'
@@ -34,9 +40,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'ervandew/supertab'
-
-Plug 'vim-scripts/winmanager'
-Plug 'majutsushi/tagbar', { 'for': ['c', 'cpp', 'rust', 'h', 'cc', 'cxx'] }
 
 call plug#end()
 
@@ -192,6 +195,9 @@ let g:tagbar_type_rust = {
 " -----------------------------------------------------------------------------
 "   Language Specific Settings
 " -----------------------------------------------------------------------------
+
+" Markdow
+autocmd FileType md let g:vim_markdown_folding_disabled = 1
 
 " PHP
 autocmd FileType php setlocal noexpandtab
