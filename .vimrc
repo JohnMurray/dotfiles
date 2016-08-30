@@ -219,6 +219,8 @@ augroup END
 
 
 " C
+autocmd BufWrite *.c,*.h,*.cc :silent exec "!ctags -R >/dev/null 2>&1 &"
+
 "" cscope
 autocmd FileType c setlocal noexpandtab
 if has('cscope')
