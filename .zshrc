@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/jmurray/.zsh
+export ZSH="$HOME/.zsh"
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -33,7 +33,7 @@ plugins=(git)
 
 # User configuration
 
-export PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin:/Library/Frameworks/Python.framework/Versions/Current/bin:/Users/jmurray/.rbenv/shims:/Users/jmurray/.rbenv/bin:/Users/jmurray/projects/go-workspace/bin:/Users/jmurray/.rbenv/shims:/Users/jmurray/.rbenv/bin:/Users/jmurray/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/MacGPG2/bin"
+export PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin:/Library/Frameworks/Python.framework/Versions/Current/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/projects/go-workspace/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/MacGPG2/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
