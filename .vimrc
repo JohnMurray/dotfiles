@@ -64,7 +64,7 @@ set backspace=indent,eol,start
 " highlight current line
 if v:version > 700
   set cursorline
-  hi CursorLine ctermbg=Black cterm=none
+  hi CursorLine cterm=none
 endif
 
 " Set absolute-vs-relative numbering
