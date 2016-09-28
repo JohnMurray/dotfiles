@@ -16,21 +16,24 @@ call plug#begin('~/.vim/plugged')
 " Misc
 Plug 'godlygeek/tabular'
 Plug 'vim-scripts/winmanager'
-Plug 'majutsushi/tagbar', { 'for': ['c', 'cpp', 'rust', 'h', 'cc', 'cxx'] }
+Plug 'majutsushi/tagbar',       { 'for': ['c', 'cpp', 'rust', 'h', 'cc', 'cxx'] }
+Plug 'Valloric/YouCompleteMe',  { 'for': ['cc', 'cxx', 'cpp'] }
+Plug 'SirVer/UltiSnips',        { 'for': ['cc', 'cxx', 'cpp'] }
 
 " Colors
 Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/base16-vim'
 
-" Syntax
-Plug 'elzr/vim-json',           { 'for': 'json'     }
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
-Plug 'StanAngeloff/php.vim',    { 'for': 'php'      }
-Plug 'vim-ruby/vim-ruby',       { 'for': 'ruby'     }
-Plug 'rust-lang/rust.vim',      { 'for': 'rust'     }
-Plug 'derekwyatt/vim-scala',    { 'for': 'scala'    }
-Plug 'fatih/vim-go',            { 'for': 'go'       }
-Plug 'cespare/vim-toml',        { 'for': 'toml'     }
+" Syntax / Language
+Plug 'elzr/vim-json',                  { 'for': 'json'     }
+Plug 'plasticboy/vim-markdown',        { 'for': 'markdown' }
+Plug 'StanAngeloff/php.vim',           { 'for': 'php'      }
+Plug 'vim-ruby/vim-ruby',              { 'for': 'ruby'     }
+Plug 'rust-lang/rust.vim',             { 'for': 'rust'     }
+Plug 'derekwyatt/vim-scala',           { 'for': 'scala'    }
+Plug 'fatih/vim-go',                   { 'for': 'go'       }
+Plug 'cespare/vim-toml',               { 'for': 'toml'     }
+Plug 'vim-scripts/DoxygenToolkit.vim', { 'for': 'cpp'      }
 
 " fancy statusline
 Plug 'vim-airline/vim-airline'
@@ -199,7 +202,6 @@ let g:tagbar_type_rust = {
     \}
 
 
-
 " -----------------------------------------------------------------------------
 "   Language Specific Settings
 " -----------------------------------------------------------------------------
@@ -220,8 +222,17 @@ augroup phpSyntaxOverride
 augroup END
 
 
-" C
+" C / C++
 autocmd BufWrite *.c,*.h,*.cc :silent exec "!ctags -R >/dev/null 2>&1 &"
+
+" C++
+function! CppConfigurationFunction()
+  set filetype=cpp.doxygen
+endfunction
+augroup CppConfiguration
+  autocmd!
+  autocmd FileType cpp call CppConfigurationFunction()
+augroup END
 
 "" cscope
 autocmd FileType c setlocal noexpandtab
