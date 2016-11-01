@@ -229,6 +229,10 @@ autocmd BufWrite *.c,*.h,*.cc :silent exec "!ctags -R >/dev/null 2>&1 &"
 " C++
 function! CppConfigurationFunction()
   set filetype=cpp.doxygen
+  set expandtab
+  set ts=4
+  set sw=4
+  set tabstop=4
 endfunction
 augroup CppConfiguration
   autocmd!
