@@ -48,5 +48,8 @@
 [push]
   default = upstream
 
+[pull]
+  rebase = true
+
 [branch]
 	autosetuprebase = always
