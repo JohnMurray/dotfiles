@@ -19,6 +19,7 @@ Plug 'vim-scripts/winmanager'
 Plug 'majutsushi/tagbar',       { 'for': ['c', 'cpp', 'rust', 'h', 'cc', 'cxx'] }
 Plug 'Valloric/YouCompleteMe',  { 'for': ['cc', 'cxx', 'cpp'] }
 Plug 'SirVer/UltiSnips',        { 'for': ['cc', 'cxx', 'cpp'] }
+Plug 'vitalk/vim-simple-todo'
 
 " Colors
 Plug 'altercation/vim-colors-solarized'
@@ -54,8 +55,15 @@ call plug#end()
 set nocompatible
 
 " color scheme selection
-let base16colorspace=256
-colorscheme base16-eighties
+if $COLORTERM == 'gnome-terminal'
+  set t_Co=256
+endif
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
+" See airline configs below for setting t_ut as it has to come after airline
+" is enabled.
 
 " turn on basic elements
 syntax on
@@ -111,14 +119,6 @@ if has("autocmd")
   \ endif
 endif
 
-
-" If we are running in GUI mode, set some colors
-if has("gui_running")
-  colorscheme solarized
-  set background=dark
-endif
-
-
 " highlight TODO markers
 hi Todo ctermbg=Black ctermfg=DarkMagenta
 
@@ -156,6 +156,12 @@ set laststatus=2
 set hidden " allow switch buffer without save
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
+if &term =~ '256color'
+  " disable Background Color Erase (BCE) so that color schemes
+  " render properly when inside 256-color tmux and GNU screen.
+  " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
+  set t_ut=
+endif
 
 " NERD-tree
 map <F2> :NERDTreeToggle<CR>
