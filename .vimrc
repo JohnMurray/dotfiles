@@ -48,22 +48,11 @@ Plug 'ervandew/supertab'
 call plug#end()
 
 " -----------------------------------------------------------------------------
-"   Editor Style Configurations
+"   General Editor Configurations
 " -----------------------------------------------------------------------------
 
 " use vim defaults
 set nocompatible
-
-" color scheme selection
-if $COLORTERM == 'gnome-terminal'
-  set t_Co=256
-endif
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
-endif
-" See airline configs below for setting t_ut as it has to come after airline
-" is enabled.
 
 " turn on basic elements
 syntax on
@@ -156,12 +145,6 @@ set laststatus=2
 set hidden " allow switch buffer without save
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-if &term =~ '256color'
-  " disable Background Color Erase (BCE) so that color schemes
-  " render properly when inside 256-color tmux and GNU screen.
-  " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
-  set t_ut=
-endif
 
 " NERD-tree
 map <F2> :NERDTreeToggle<CR>
@@ -297,3 +280,30 @@ endif
 " Rust
 autocmd FileType rust setlocal tags=./rusty-tags.vi;/
 autocmd BufWrite *.rs :silent exec "!rusty-tags vi --start-dir=" . expand('%:p:h') . " > /dev/null 2>&1 &"
+
+
+
+
+" -----------------------------------------------------------------------------
+"   Color Scheme Configuration
+" -----------------------------------------------------------------------------
+
+" color scheme selection
+if $COLORTERM == 'gnome-terminal'
+  set t_Co=256
+endif
+if filereadable(expand("~/.vimrc_background"))
+   let base16colorspace=256
+   source ~/.vimrc_background
+endif
+if &term =~ '256color'
+  " disable Background Color Erase (BCE) so that color schemes
+  " render properly when inside 256-color tmux and GNU screen.
+  " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
+  set t_ut=
+  " disable opaque background
+endif
+
+" disable background color to allow terminal defaults to be used
+hi Normal guibg=NONE ctermbg=NONE
+hi NonText guibg=NONE ctermbg=NONE
