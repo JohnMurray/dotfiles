@@ -16,7 +16,7 @@ call plug#begin('~/.vim/plugged')
 " Misc
 Plug 'godlygeek/tabular'
 Plug 'vim-scripts/winmanager'
-Plug 'majutsushi/tagbar',       { 'for': ['c', 'cpp', 'rust', 'h', 'cc', 'cxx'] }
+Plug 'majutsushi/tagbar',       { 'for': ['c', 'cpp', 'rust', 'h', 'cc', 'cxx', 'go'] }
 Plug 'Valloric/YouCompleteMe',  { 'for': ['cc', 'cxx', 'cpp'] }
 Plug 'SirVer/UltiSnips',        { 'for': ['cc', 'cxx', 'cpp'] }
 Plug 'vitalk/vim-simple-todo'
@@ -190,7 +190,33 @@ let g:tagbar_type_rust = {
         \'i:impls,trait implementations',
     \]
     \}
-
+let g:tagbar_type_go = {
+	\ 'ctagstype' : 'go',
+	\ 'kinds'     : [
+		\ 'p:package',
+		\ 'i:imports:1',
+		\ 'c:constants',
+		\ 'v:variables',
+		\ 't:types',
+		\ 'n:interfaces',
+		\ 'w:fields',
+		\ 'e:embedded',
+		\ 'm:methods',
+		\ 'r:constructor',
+		\ 'f:functions'
+	\ ],
+	\ 'sro' : '.',
+	\ 'kind2scope' : {
+		\ 't' : 'ctype',
+		\ 'n' : 'ntype'
+	\ },
+	\ 'scope2kind' : {
+		\ 'ctype' : 't',
+		\ 'ntype' : 'n'
+	\ },
+	\ 'ctagsbin'  : 'gotags',
+	\ 'ctagsargs' : '-sort -silent'
+\ }
 
 " -----------------------------------------------------------------------------
 "   Language Specific Settings
@@ -281,6 +307,8 @@ endif
 autocmd FileType rust setlocal tags=./rusty-tags.vi;/
 autocmd BufWrite *.rs :silent exec "!rusty-tags vi --start-dir=" . expand('%:p:h') . " > /dev/null 2>&1 &"
 
+" Go
+autocmd BufWrite *.go :silent exec "!gotags -tag-relative=true -R=true -sort=true -f='tags' -fields=+l " . expand('%:p:h') . " >/dev/null 2>&1 &"
 
 
 
