@@ -31,22 +31,31 @@ COMPLETION_WAITING_DOTS="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
-# User configuration
 
-export PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin:/Library/Frameworks/Python.framework/Versions/Current/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/projects/go-workspace/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/MacGPG2/bin"
-# export MANPATH="/usr/local/man:$MANPATH"
 
+
+## --------------------------------------------------------------
+## User configuration
+## --------------------------------------------------------------
+export PATH="/usr/local/bin:/usr/sbin:/sbin:$PATH"
 source $ZSH/oh-my-zsh.sh
-
 export LANG=en_US.UTF-8
-
 EDITOR='vim'
 
+# Load machine-specific configs (file not versioned)
+[[ -e "$HOME/.zshrc_ext" ]] && source $HOME/.zshrc_ext
+
 # See https://github.com/chriskempson/base16-shell for more themes
-BASE16_SHELL="$HOME/.config/base16-eighties.dark.sh"
-[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+BASE16_SHELL=$HOME/.config/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+base16_eighties
 
 
+
+
+## --------------------------------------------------------------
+## AppNexus Configuration
+## --------------------------------------------------------------
 
 function  ldap-group() {
   CMD="ldapsearch -h ad.corp.appnexus.com -x -b dc=ad,dc=corp,dc=appnexus,dc=com -D 'ad\jmurray' -x -W '(proxyAddresses=smtp:$1@appnexus.com)' | grep 'member: CN=' | sed 's/,.*$//' | sed 's/^.*=//'"

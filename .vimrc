@@ -16,9 +16,10 @@ call plug#begin('~/.vim/plugged')
 " Misc
 Plug 'godlygeek/tabular'
 Plug 'vim-scripts/winmanager'
-Plug 'majutsushi/tagbar',       { 'for': ['c', 'cpp', 'rust', 'h', 'cc', 'cxx'] }
-Plug 'SirVer/UltiSnips',        { 'for': ['cc', 'cxx', 'cpp', 'cc', 'h'] }
-Plug 'Valloric/YouCompleteMe',  { 'for': ['cc', 'cxx', 'cpp', 'cc', 'h'] }
+Plug 'majutsushi/tagbar',       { 'for': ['c', 'cpp', 'rust', 'h', 'cc', 'cxx', 'go'] }
+Plug 'Valloric/YouCompleteMe',  { 'for': ['cc', 'cxx', 'cpp'] }
+Plug 'SirVer/UltiSnips',        { 'for': ['cc', 'cxx', 'cpp'] }
+Plug 'vitalk/vim-simple-todo'
 
 " Colors
 Plug 'altercation/vim-colors-solarized'
@@ -47,15 +48,11 @@ Plug 'ervandew/supertab'
 call plug#end()
 
 " -----------------------------------------------------------------------------
-"   Editor Style Configurations
+"   General Editor Configurations
 " -----------------------------------------------------------------------------
 
 " use vim defaults
 set nocompatible
-
-" color scheme selection
-let base16colorspace=256
-colorscheme base16-eighties
 
 " turn on basic elements
 syntax on
@@ -110,14 +107,6 @@ if has("autocmd")
   \  exe "normal! g'\"" |
   \ endif
 endif
-
-
-" If we are running in GUI mode, set some colors
-if has("gui_running")
-  colorscheme solarized
-  set background=dark
-endif
-
 
 " highlight TODO markers
 hi Todo ctermbg=Black ctermfg=DarkMagenta
@@ -201,7 +190,33 @@ let g:tagbar_type_rust = {
         \'i:impls,trait implementations',
     \]
     \}
-
+let g:tagbar_type_go = {
+	\ 'ctagstype' : 'go',
+	\ 'kinds'     : [
+		\ 'p:package',
+		\ 'i:imports:1',
+		\ 'c:constants',
+		\ 'v:variables',
+		\ 't:types',
+		\ 'n:interfaces',
+		\ 'w:fields',
+		\ 'e:embedded',
+		\ 'm:methods',
+		\ 'r:constructor',
+		\ 'f:functions'
+	\ ],
+	\ 'sro' : '.',
+	\ 'kind2scope' : {
+		\ 't' : 'ctype',
+		\ 'n' : 'ntype'
+	\ },
+	\ 'scope2kind' : {
+		\ 'ctype' : 't',
+		\ 'ntype' : 'n'
+	\ },
+	\ 'ctagsbin'  : 'gotags',
+	\ 'ctagsargs' : '-sort -silent'
+\ }
 
 " -----------------------------------------------------------------------------
 "   Language Specific Settings
@@ -291,3 +306,32 @@ endif
 " Rust
 autocmd FileType rust setlocal tags=./rusty-tags.vi;/
 autocmd BufWrite *.rs :silent exec "!rusty-tags vi --start-dir=" . expand('%:p:h') . " > /dev/null 2>&1 &"
+
+" Go
+autocmd BufWrite *.go :silent exec "!gotags -tag-relative=true -R=true -sort=true -f='tags' -fields=+l " . expand('%:p:h') . " >/dev/null 2>&1 &"
+
+
+
+" -----------------------------------------------------------------------------
+"   Color Scheme Configuration
+" -----------------------------------------------------------------------------
+
+" color scheme selection
+if $COLORTERM == 'gnome-terminal'
+  set t_Co=256
+endif
+if filereadable(expand("~/.vimrc_background"))
+   let base16colorspace=256
+   source ~/.vimrc_background
+endif
+if &term =~ '256color'
+  " disable Background Color Erase (BCE) so that color schemes
+  " render properly when inside 256-color tmux and GNU screen.
+  " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
+  set t_ut=
+  " disable opaque background
+endif
+
+" disable background color to allow terminal defaults to be used
+hi Normal guibg=NONE ctermbg=NONE
+hi NonText guibg=NONE ctermbg=NONE
