@@ -17,8 +17,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'godlygeek/tabular'
 Plug 'vim-scripts/winmanager'
 Plug 'majutsushi/tagbar',       { 'for': ['c', 'cpp', 'rust', 'h', 'cc', 'cxx'] }
-Plug 'Valloric/YouCompleteMe',  { 'for': ['cc', 'cxx', 'cpp'] }
-Plug 'SirVer/UltiSnips',        { 'for': ['cc', 'cxx', 'cpp'] }
+Plug 'SirVer/UltiSnips',        { 'for': ['cc', 'cxx', 'cpp', 'cc', 'h'] }
+Plug 'Valloric/YouCompleteMe',  { 'for': ['cc', 'cxx', 'cpp', 'cc', 'h'] }
 
 " Colors
 Plug 'altercation/vim-colors-solarized'
