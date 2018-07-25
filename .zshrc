@@ -37,19 +37,44 @@ plugins=(git)
 ## --------------------------------------------------------------
 ## User configuration
 ## --------------------------------------------------------------
-export PATH="/usr/local/bin:/usr/sbin:/sbin:$PATH"
+export PATH="/usr/local/bin:/usr/sbin:/sbin:$PATH:$HOME/bin"
 source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 EDITOR='vim'
 
-# Load machine-specific configs (file not versioned)
-[[ -e "$HOME/.zshrc_ext" ]] && source $HOME/.zshrc_ext
-
 # See https://github.com/chriskempson/base16-shell for more themes
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-base16_eighties
+export PS1="
+$(_user_host)${_current_dir} $(git_prompt_info) $(_ruby_version)
+[%*] %{$fg[$CARETCOLOR]%}λ%{$resetcolor%} "
 
+##---
+## Color Theme
+##---
+## Some color schemes that I like, so I don't forget and
+## dont' have to cycle through all the ones to find these
+## again.
+##---
+## light
+##   - base16_default-light
+## lighter-dark
+##   - base16_flat
+##   - base16_materia
+## middle-dark
+##   - base16_nord
+## darker dark
+##   - base16_eighties
+##   - base16_default-dark
+##---
+base16_materia
+function c() {
+  base16_materia
+}
+
+
+# Load machine-specific configs (file not versioned)
+[[ -e "$HOME/.zshrc_ext" ]] && source $HOME/.zshrc_ext
 
 
 
