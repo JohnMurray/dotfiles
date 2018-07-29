@@ -45,9 +45,9 @@ EDITOR='vim'
 # See https://github.com/chriskempson/base16-shell for more themes
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-export PROMPT="
+export PROMPT='
 $(_user_host)${_current_dir} $(git_prompt_info) $(_ruby_version)
-[%*] %{$fg[$CARETCOLOR]%}λ%{$resetcolor%} "
+[%*] %{$fg[$CARETCOLOR]%}λ%{$resetcolor%} '
 
 ##---
 ## Color Theme
