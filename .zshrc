@@ -67,9 +67,12 @@ $(_user_host)${_current_dir} $(git_prompt_info) $(_ruby_version)
 ##   - base16_eighties
 ##   - base16_default-dark
 ##---
-base16_materia
+base16_github
 function c() {
   base16_materia
+}
+function cl() {
+  base16_github
 }
 
 

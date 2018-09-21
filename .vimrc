@@ -17,8 +17,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'godlygeek/tabular'
 Plug 'vim-scripts/winmanager'
 Plug 'majutsushi/tagbar',       { 'for': ['c', 'cpp', 'rust', 'h', 'cc', 'cxx', 'go'] }
-Plug 'Valloric/YouCompleteMe',  { 'for': ['cc', 'cxx', 'cpp'] }
-Plug 'SirVer/UltiSnips',        { 'for': ['cc', 'cxx', 'cpp'] }
+Plug 'Valloric/YouCompleteMe',  { 'for': ['cc', 'cxx', 'cpp', 'c', 'h'] }
+Plug 'SirVer/UltiSnips',        { 'for': ['cc', 'cxx', 'cpp', 'h'] }
 Plug 'vitalk/vim-simple-todo'
 
 " Colors
@@ -137,7 +137,7 @@ nmap <C-c> :bp\|bd #<CR>
 " -----------------------------------------------------------------------------
 
 " Airline
-set term=xterm-256color
+"set term=xterm-256color
 set termencoding=utf-8
 set encoding=utf-8
 let g:airline_powerline_fonts = 1
@@ -166,8 +166,12 @@ augroup END
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
+"SuperTab
+let g:SuperTabClosePreviewOnPopupClose = 1
+
 " TagBar
 if has("unix")
+    let g:tagbar_ctags_bin = '/usr/bin/ctags'
   let s:uname = system("uname -s")
   if s:uname == "Darwin"
     " Do Mac stuff here
@@ -225,6 +229,9 @@ let g:tagbar_type_go = {
 " Markdown
 let g:vim_markdown_folding_disabled = 1
 
+" Notes
+autocmd BufNewFile,BufRead *.note set filetype=markdown
+
 " PHP
 autocmd FileType php setlocal noexpandtab
 function! PhpSyntaxOverride()
@@ -239,7 +246,18 @@ augroup END
 
 
 " C / C++
-autocmd BufWrite *.c,*.h,*.cc :silent exec "!ctags -R >/dev/null 2>&1 &"
+"autocmd BufWrite *.c,*.h,*.cc :silent exec "!rm -rf tags && ctags -R . /usr/local/include/ >/dev/null 2>&1 &"
+function! CConfigurationFunction()
+  set filetype=c.doxygen
+  set noexpandtab
+  set ts=8
+  set sw=8
+  set tabstop=8
+endfunction
+augroup CConfiguration
+  autocmd!
+  autocmd FileType c call CConfigurationFunction()
+augroup END
 
 " C++
 function! CppConfigurationFunction()
@@ -333,5 +351,5 @@ if &term =~ '256color'
 endif
 
 " disable background color to allow terminal defaults to be used
-hi Normal guibg=NONE ctermbg=NONE
-hi NonText guibg=NONE ctermbg=NONE
+hi Normal ctermbg=NONE
+hi NonText ctermbg=NONE
