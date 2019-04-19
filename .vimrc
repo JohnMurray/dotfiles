@@ -3,19 +3,27 @@
 " -----------------------------------------------------------------------------
 
 " bootstrap plug if needed
-if empty(glob("~/.vim/autoload/plug.vim"))
-  " Ensure all needed directories are created
-  silent execute '!mkdir -p ~/.vim/plugged'
-  silent execute '!mkdir -p ~/.vim/autoload'
-  " Download the actual plugin manager
-  silent execute '!curl -fLo ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+if has('nvim')
+  if empty(glob("~/.local/share/nvim/site/autoload/plug.vim"))
+      " Ensure all needed directories are created
+      silent execute '!mkdir -p ~/.local/share/nvim/site/autoload'
+      silent execute '!curl -fLo ~/.local/share/nvim/site/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  endif
+else
+  if empty(glob("~/.vim/autoload/plug.vim"))
+      " Ensure all needed directories are created
+      silent execute '!mkdir -p ~/.vim/plugged'
+      silent execute '!mkdir -p ~/.vim/autoload'
+      " Download the actual plugin manager
+      silent execute '!curl -fLo ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  endif
 endif
 
 call plug#begin('~/.vim/plugged')
 
 " Misc
-Plug 'godlygeek/tabular'
-Plug 'vim-scripts/winmanager'
+"" Plug 'godlygeek/tabular'
+"" Plug 'vim-scripts/winmanager'
 Plug 'majutsushi/tagbar',       { 'for': ['c', 'cpp', 'rust', 'h', 'cc', 'cxx', 'go'] }
 Plug 'Valloric/YouCompleteMe',  { 'for': ['cc', 'cxx', 'cpp', 'c', 'h'] }
 Plug 'SirVer/UltiSnips',        { 'for': ['cc', 'cxx', 'cpp', 'h'] }
@@ -26,15 +34,16 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/base16-vim'
 
 " Syntax / Language
-Plug 'elzr/vim-json',                  { 'for': 'json'     }
-Plug 'plasticboy/vim-markdown',        { 'for': 'markdown' }
-Plug 'StanAngeloff/php.vim',           { 'for': 'php'      }
-Plug 'vim-ruby/vim-ruby',              { 'for': 'ruby'     }
-Plug 'rust-lang/rust.vim',             { 'for': 'rust'     }
-Plug 'derekwyatt/vim-scala',           { 'for': 'scala'    }
-Plug 'fatih/vim-go',                   { 'for': 'go'       }
-Plug 'cespare/vim-toml',               { 'for': 'toml'     }
-Plug 'vim-scripts/DoxygenToolkit.vim', { 'for': 'cpp'      }
+Plug 'elzr/vim-json',                  { 'for': 'json'       }
+Plug 'plasticboy/vim-markdown',        { 'for': 'markdown'   }
+Plug 'StanAngeloff/php.vim',           { 'for': 'php'        }
+Plug 'vim-ruby/vim-ruby',              { 'for': 'ruby'       }
+Plug 'rust-lang/rust.vim',             { 'for': 'rust'       }
+Plug 'derekwyatt/vim-scala',           { 'for': 'scala'      }
+Plug 'fatih/vim-go',                   { 'for': 'go'         }
+Plug 'cespare/vim-toml',               { 'for': 'toml'       }
+Plug 'vim-scripts/DoxygenToolkit.vim', { 'for': 'cpp'        }
+Plug 'leafgarland/typescript-vim',     { 'for': 'typescript' }
 
 " fancy statusline
 Plug 'vim-airline/vim-airline'
