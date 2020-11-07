@@ -49,6 +49,11 @@ export PROMPT='
 $(_user_host)${_current_dir} $(git_prompt_info) $(_ruby_version)
 [%*] %{$fg[$CARETCOLOR]%}λ%{$resetcolor%} '
 
+# Customize shell prompt for VSCode container-environment
+if [ "$DEV_ENVIRONMENT" = "vscode-container" ] ; then
+  export RPROMPT=""
+fi
+
 ##---
 ## Color Theme
 ##---
@@ -63,13 +68,14 @@ $(_user_host)${_current_dir} $(git_prompt_info) $(_ruby_version)
 ##   - base16_materia
 ## middle-dark
 ##   - base16_nord
+##   - base16_ashes
 ## darker dark
 ##   - base16_eighties
 ##   - base16_default-dark
 ##---
-base16_github
+base16_gruvbox-dark-medium
 function c() {
-  base16_materia
+  base16_gruvbox-dark-medium
 }
 function cl() {
   base16_github
@@ -124,3 +130,6 @@ function ago() {
 function m {
   ago "murray" $@
 }
+
+
+export LESS="-E -F -X $LESS"
