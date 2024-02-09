@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH="$HOME/.zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -40,13 +40,15 @@ plugins=(git)
 export PATH="/usr/local/bin:/usr/sbin:/sbin:$PATH:$HOME/bin"
 source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
-EDITOR='vim'
+EDITOR='nvim'
 
 # See https://github.com/chriskempson/base16-shell for more themes
 BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        source "$BASE16_SHELL/profile_helper.sh"
 export PROMPT='
-$(_user_host)${_current_dir} $(git_prompt_info) $(_ruby_version)
+$(_user_host)${_current_dir} $(git_prompt_info)
 [%*] %{$fg[$CARETCOLOR]%}λ%{$resetcolor%} '
 
 # Customize shell prompt for VSCode container-environment
